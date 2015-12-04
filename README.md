@@ -20,19 +20,23 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
 ###集成插件
 1. 如果自行处理插件下载，下载好后调用下面的方法：
 ```java
+    //mUseHostNativeLibs 一般为false， 如果宿主已经包含了插件的所有so，设置为true
     PluginOpener.startPlugin(this, apkFullPath, mUseHostNativeLibs, new OnPluginLoadListener());
 ```
-  mUseHostNativeLibs 一般为false， 如果宿主已经包含了插件的所有so，设置为true
+  
   
 2. 如果使用SDK进行插件下载，使用以下代码:
 ```java
    Intent intent = new Intent(this, KoStartUpActivity.class);
+   //输入要下载插件的url，请先与我们约定
    intent.putExtra(KoStartUpActivity.KEY_DOWNLOAD_URL, mPluginDownloadUrl);
    File dir = new File(mLocalPluginDirPath);
     if (!dir.exists()) {
        dir.mkdirs();
     }
+    // 插件下载后，存放在本地的目录的路径
    intent.putExtra(KoStartUpActivity.KEY_FILE_PATH, mLocalPluginDirPath);
+   // 插件文件名
    intent.putExtra(KoStartUpActivity.KEY_FILE_NAME, mApkFileName);
    startActivity(intent);
 ```
