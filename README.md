@@ -1,4 +1,4 @@
-简介：
+###简介：
 竞技台插件SDK（框架）， 主要提供了在免安装的情况下，运行KO对战游戏的能力。
 ###运行Demo
 Demo 分为TV版和手机版
@@ -10,4 +10,21 @@ HostDemo.TV：TV版的demo源码
 2. 直接安装 KOPluginHostDemo.TV.apk，  运行, 点击 启动竞技台插件 按钮；
 或者，
 Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插件 按钮
+
+###集成插件
+1. 如果自行处理插件下载，下载好后调用下面的方法：
+
+>  PluginOpener.startPlugin(this, apkFullPath, mUseHostNativeLibs, new OnPluginLoadListener());
+  
+  mUseHostNativeLibs 一般为false， 如果宿主已经包含了插件的所有so，设置为true
+2. 如果使用SDK进行插件下载，使用以下代码:
+>       Intent intent = new Intent(this, KoStartUpActivity.class);
+        intent.putExtra(KoStartUpActivity.KEY_DOWNLOAD_URL, mPluginDownloadUrl);
+        File dir = new File(mLocalPluginDirPath);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        intent.putExtra(KoStartUpActivity.KEY_FILE_PATH, mLocalPluginDirPath);
+        intent.putExtra(KoStartUpActivity.KEY_FILE_NAME, mApkFileName);
+        startActivity(intent);
 
