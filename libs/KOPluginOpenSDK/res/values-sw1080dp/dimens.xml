@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="ko_view_dimen_10px">10.00dp</dimen>
+    <dimen name="ko_view_dimen_110px">110.00dp</dimen>
+    <dimen name="ko_view_dimen_140px">140.00dp</dimen>
+    <dimen name="ko_view_dimen_14px">14.00dp</dimen>
+    <dimen name="ko_view_dimen_20px">20.00dp</dimen>
+    <dimen name="ko_view_dimen_240px">240.00dp</dimen>
+</resources>

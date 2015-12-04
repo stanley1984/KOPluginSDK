@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="ko_view_dimen_10px">6.67dp</dimen>
+    <dimen name="ko_view_dimen_14px">9.33dp</dimen>
+    <dimen name="ko_view_dimen_20px">13.33dp</dimen>
+    <dimen name="ko_view_dimen_30px">20dp</dimen>
+    <dimen name="ko_view_dimen_40px">26.67dp</dimen>
+    <dimen name="ko_view_dimen_45px">30dp</dimen>
+    <dimen name="ko_view_dimen_76px">50.67dp</dimen>
+    <dimen name="ko_view_dimen_90px">60dp</dimen>
+    <dimen name="ko_view_dimen_110px">73.33dp</dimen>
+    <dimen name="ko_view_dimen_140px">93.33dp</dimen>
+    <dimen name="ko_view_dimen_240px">160dp</dimen>
+    <dimen name="ko_font_size_24px">12sp</dimen>
+    <dimen name="ko_font_size_40px">20sp</dimen>
+</resources>

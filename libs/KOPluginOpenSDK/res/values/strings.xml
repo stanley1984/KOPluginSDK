@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="ko_download_plugin_downloading_tips">正在下载竞技台%1$.2f%%</string>
+    <string name="ko_download_plugin_update_tips">正在更新竞技台%1$.2f%%</string>
+    <string name="ko_download_plugin_download_fail">竞技台下载失败，请稍后重试！</string>
+    <string name="ko_starting_plugin_tips">正在启动竞技台&#8230;</string>
+    <string name="ko_network_connect_fail">网络不可用，请检查您的网络状况后重试！</string>
+    <string name="ko_download_fail_out_of_space">空间不足，无法下载</string>
+    <string name="ko_file_download_url_404">文件链接暂时无法访问，请稍后再试。</string>
+    <string name="ko_network_default_wifi_name">WIFI</string>
+    <string name="ko_network_default_ethernet_name">有线网</string>
+    <string name="ko_network_default_2G_name">2G</string>
+    <string name="ko_network_default_3G_name">3G</string>
+    <string name="ko_network_default_4G_name">4G</string>
+    <string name="ko_network_req_time_out">网络请求超时，请稍后重试!</string>
+    <string name="ko_prompt">提示</string>
+    <string name="ko_network_setting">设置网络</string>
+    <string name="ko_retry">重试</string>
+    <string name="ko_exit">退出</string>
+
+</resources>

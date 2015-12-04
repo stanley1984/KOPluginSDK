@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">KO插件SDK宿主端Demo</string>
+    <string name="start_plugin">方案1：启动本地手机版“竞技台”插件</string>
+    <string name="start_download_launch_plugin">方案2：下载并启动手机版“竞技台”插件</string>
+    <string name="plugin_download_url">http://download.vszone.cn/android/KoMobileArena_189store_latest.apk</string>
+    <string name="plugin_dir_path">mnt/sdcard/ko_plugin_mobile_test/</string>
+    <string name="plugin_filename">KoMobileArena.apk</string>
+    <string name="intro">         方案1：自行下载插件，放置到指定目录后，进行加载。\n
+         方案2: SDK集成下载插件功能，需要设置参数：\n
+         （1）下载url\n
+         （2）下载后本地sdcard上的存放目录\n</string>
+    <string name="tv_start_plugin">方案1：启动本地TV版“竞技台”插件</string>
+    <string name="tv_start_download_launch_plugin">方案2：下载并启动TV版“竞技台”插件</string>
+    <string name="tv_plugin_dir_path">mnt/sdcard/ko_plugin_tv_test/</string>
+    <string name="tv_plugin_download_url">http://download.vszone.cn/tv/KoTvArena_kobox_latest.apk</string>
+    <string name="tv_plugin_filename">KoTvArena.apk</string>
+    <string name="tv_intro">方案1：自行下载插件，放置到指定目录后，进行加载\n
+方案2: SDK集成下载插件功能，需要设置参数：\n
+（1）下载url\n
+（2）下载后本地sdcard上的存放目录\n</string>
+
+</resources>
