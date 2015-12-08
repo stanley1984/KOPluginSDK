@@ -129,7 +129,7 @@
         <!--这里填写debug 对应的app_key -->
         <meta-data
             android:name="KO_APP_ID"
-            android:value="Xiaomi" />
+            android:value="Tencent_TVGame" />
 
         <activity
             android:name="cn.vszone.ko.plugin.sdk.KoStartUpActivity"
