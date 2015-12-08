@@ -18,20 +18,19 @@ HostDemo.TV：TV版的demo源码
 Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插件 按钮
 
 ###集成插件
-1.引入KOPluginOpenSDK库工程。
+* 1.引入KOPluginOpenSDK库工程
 
-2. 如果自行处理插件下载，下载好后调用下面的方法：
+* 2.如果自行处理插件下载，下载好后调用下面的方法
 ```java
     Intent intent = new Intent(this, KoLoadPluginActivity.class);
     // 插件下载后，存放在本地的目录的路径
-   intent.putExtra(KoLoadPluginActivity.KEY_FILE_PATH, mLocalPluginDirPath);
-   // 插件文件名
-   intent.putExtra(KoLoadPluginActivity.KEY_FILE_NAME, mApkFileName);
-   startActivity(intent);
+    intent.putExtra(KoLoadPluginActivity.KEY_FILE_PATH, mLocalPluginDirPath);
+    // 插件文件名
+    intent.putExtra(KoLoadPluginActivity.KEY_FILE_NAME, mApkFileName);
+    startActivity(intent);
 ```
-  
-  
-3. 如果使用SDK进行插件下载，使用以下代码:
+
+* 3.如果使用SDK进行插件下载，使用以下代码
 ```java
    Intent intent = new Intent(this, KoStartUpActivity.class);
    //输入要下载插件的url，请先与我们约定
