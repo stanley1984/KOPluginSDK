@@ -21,9 +21,9 @@ public class StartPluginWithDownloadActivity extends Activity {
 
      ##首先， 请务必正确设置AndroidManifest.xml的 KO_APP_KEY，KO_APP_ID，具体参考文档
 
-     ##插件文件名
+    ##插件文件名
     private String              mApkFileName        = "";
-     ##插件在本地sdcard的目录
+    ##插件在本地sdcard的目录
     private String              mLocalPluginDirPath = "";
     ##插件文件名下载地址，针对方案2需要设置
     private String              mPluginDownloadUrl  = "";
@@ -40,7 +40,7 @@ public class StartPluginWithDownloadActivity extends Activity {
         setContentView(R.layout.activity_main);
         mStartLocal = (Button) findViewById(R.id.main_btn_start_local_plugin);
         mDownloadApk = (Button) findViewById(R.id.main_btn_download_plugin);
-
+        BranchConfig.isTvArena = true;
         initView();
         // 若没有设置各种路径
         if (TextUtils.isEmpty(mApkFileName) ||TextUtils.isEmpty(mLocalPluginDirPath)  || TextUtils.isEmpty(mPluginDownloadUrl)) {
