@@ -26,11 +26,8 @@ public class StartPluginWithDownloadActivity extends Activity {
     // 插件在本地sdcard的目录
     private String              mLocalPluginDirPath = "";
     // 插件文件名下载地址，针对方案2需要设置
-    private String              mPluginDownloadUrl  =
-                                                        "http://estoresrvice.189store.com/api/app/download/app.json?clientid=36e162193e94c714566e369b832ae0fa&packagename=cn.vszone.ko.mobile.arena&app_id=2293017&chn=tianyi&source=com.eshore.ezone_5098&rn=1&is_update=0";
+    private String              mPluginDownloadUrl  = "http://download.vszone.cn/android/KoMobileArena_kobox_latest.apk";
 
-    public static final String           DEFAULT_APK_DOENLOAD_URL_TV =
-            "http://download.vszone.cn/android/KoTvArena_kobox_latest.apk";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +36,6 @@ public class StartPluginWithDownloadActivity extends Activity {
 //        mPluginDownloadUrl = getString(R.string.plugin_download_url);
         mApkFileName = getString(R.string.plugin_filename);
         BranchConfig.isTvArena = false;
-        if(BranchConfig.isTvArena){
-            mPluginDownloadUrl = DEFAULT_APK_DOENLOAD_URL_TV;
-        }
-        // mLocalPluginPathView = (EditText)
-        // this.findViewById(R.id.main_btn_start_local_plugin);
-        // mPluginDownloadUrlView = (EditText)
-        // this.findViewById(R.id.main_et_plugin_url);
     }
 
     @Override

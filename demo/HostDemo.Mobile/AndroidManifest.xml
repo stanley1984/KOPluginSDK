@@ -128,7 +128,7 @@
         <!-- 这里填写debug 对应的app_key -->
         <meta-data
             android:name="KO_APP_ID"
-            android:value="189store" />
+            android:value="partern" />
 
         <activity
             android:name="cn.vszone.ko.plugin.sdk.KoStartUpActivity"
