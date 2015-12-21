@@ -63,7 +63,7 @@ public class KoStartUpActivity extends Activity {
     private String                       mPluginDir;
     private String                       m186StoreRequestUrl;
     //private String                       mDownloadUrl;
-    private ImageView                    mStartBg;
+    private ImageView                    mStartBgImageView;
     // 实际要下载的url
     private String                       mApkUrl;
 
@@ -115,6 +115,10 @@ public class KoStartUpActivity extends Activity {
 
         String downloadUrl = bundle.getString(KEY_DOWNLOAD_URL);
         if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOPartnerAppId(getApplicationContext()))){
+            
+            // 设置背景图：
+            mStartBgImageView.setImageResource(R.drawable.ko_startup_bg_189store);
+            // 设置地址
             m186StoreRequestUrl = downloadUrl;
             if (TextUtils.isEmpty(m186StoreRequestUrl) || VSBuildConfig.isInPluginTestMode()) {
                 mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
@@ -236,6 +240,7 @@ public class KoStartUpActivity extends Activity {
     private void initView() {
         mStatusTipTv = (TextView) findViewById(R.id.main_loading_tv_timetips);
         mHProgress = (KoHProgressBar) findViewById(R.id.main_loading_start_hpb_load);
+        mStartBgImageView = (ImageView) findViewById(R.id.start_up_bg);
     }
 
     private void downloadPlugin(String pDownloadUrl) {

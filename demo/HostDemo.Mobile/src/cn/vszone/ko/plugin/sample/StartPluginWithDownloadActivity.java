@@ -38,7 +38,7 @@ public class StartPluginWithDownloadActivity extends Activity {
         mLocalPluginDirPath = getString(R.string.plugin_dir_path);
 //        mPluginDownloadUrl = getString(R.string.plugin_download_url);
         mApkFileName = getString(R.string.plugin_filename);
-        BranchConfig.isTvArena = true;
+        BranchConfig.isTvArena = false;
         if(BranchConfig.isTvArena){
             mPluginDownloadUrl = DEFAULT_APK_DOENLOAD_URL_TV;
         }
