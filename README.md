@@ -21,7 +21,7 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
 * 1.引入KOPluginOpenSDK库工程
 
 * 2. AndroidManifest.xml 的配置
-- 权限声明
++ 权限声明
 ```xml
     <!-- 接收系统通知权限组 -->
     <uses-permission android:name="android.permission.RESTART_PACKAGES" />
@@ -66,7 +66,7 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
     <!-- 接收消息 -->
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 ```
-- application， 进行游戏时，需要比较大的内存支持， 需要设置 largeHeap 为true。
++ application， 进行游戏时，需要比较大的内存支持， 需要设置 largeHeap 为true。
 
 ```xml
     <application
@@ -75,24 +75,25 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
         android:largeHeap="true"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
 ```
-TV版本特别配置：
+  TV版本特别配置：
 ```xml
     <uses-feature
         android:name="android.hardware.type.television"
         android:required="true" />
 ```
-- meta-data
++ meta-data
 ```xml
+        <!-- 请联系我们的技术人员获取 -->
         <meta-data
             android:name="KO_APP_KEY"
             android:value="dE0oRhauOX75w0bEXvb29。。。。。。。。XXXxxxxxx" />
         <!-- 这里填写合作方的名称ID， 用于统计 -->
         <meta-data
             android:name="KO_APP_ID"
-            android:value="Xiaomi" />
+            android:value="XXXX" />
 
 ```
-- activity, service等配置 (TV版， 手机版需要注意横竖屏配置，具体以demo为准)
++ activity, service等配置 (TV版， 手机版需要注意横竖屏配置，具体以demo为准)
 ```xml
         <!-- 插件的代理器，使用框架必须声明 -->
         <activity
@@ -132,7 +133,7 @@ TV版本特别配置：
             android:process=":koproxy" />
 
 ```
-(使用SDK进行插件下载才需要)
+  (使用SDK进行插件下载才需要)
 ```xml
         <activity
             android:name="cn.vszone.ko.plugin.sdk.KoStartUpActivity"
