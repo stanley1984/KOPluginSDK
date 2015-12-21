@@ -87,10 +87,14 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
         <meta-data
             android:name="KO_APP_KEY"
             android:value="dE0oRhauOX75w0bEXvb29。。。。。。。。XXXxxxxxx" />
-        <!-- 这里填写合作方的名称ID， 用于统计 -->
+        <!-- 这里填写合作方的名称ID-->
         <meta-data
             android:name="KO_APP_ID"
             android:value="XXXX" />
+        <!-- 填写与KO_APP_ID一样的值， 用于统计 -->    
+        <meta-data
+            android:name="KO_CHANNEL"
+            android:value="XXXX" />            
 
 ```
 + activity, service等配置 (TV版， 手机版需要注意横竖屏配置，具体以demo为准)
