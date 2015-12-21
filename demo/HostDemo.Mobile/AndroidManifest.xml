@@ -121,13 +121,17 @@
         -->
         <!--这里填写debug 对应的app_key -->
         <!-- 如果打release包的话value 用上面的  如果debug包就用下面的value -->
+
         <meta-data
+             ###集成到项目中， 这里需要修改
             android:name="KO_APP_KEY"
             android:value="dE0oRhauOX75w0bEXvb29htNM6QQ6IjT91OO3uiK4/tW7gU7+PKAxNlof7k0hWxDHEj28R6TMFIFCv2vbb7hgw==" />
 
         <!-- 这里填写debug 对应的app_key -->
+        
         <meta-data
             android:name="KO_APP_ID"
+            ###集成到项目中， 这里需要修改
             android:value="partern" />
 
         <activity
