@@ -1,5 +1,5 @@
 附1：查看Debug keystore 的MD5:
-
+[](https://github.com/stanley1984/KOPluginSDK/tree/develop/images/debug_md5.png)
 
 附2：查看正式keystore 的MD5， 可通过命令行：
 keytool  -v -list -alias xxxx -keystore xxxxx.keystore
