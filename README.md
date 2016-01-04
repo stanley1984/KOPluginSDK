@@ -1,3 +1,9 @@
+###更新日志
+
+|日期|更新内容|
+| :-----: | :-----: |
+|2016-01-04|增加Manifest.xml的ProxyActivity的data配置|
+
 ###简介：
 竞技台插件SDK（框架）， 主要提供了在免安装的情况下，运行KO对战游戏的能力。
 
@@ -111,6 +117,8 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
             <intent-filter>
                 <action android:name="cn.vszone.ko.pay.action" />
                 <category android:name="android.intent.category.DEFAULT" />
+                ##此处需要修改替换KO_CHANNEL，与上面的meta-data保持一致
+                <data android:scheme="Plugin_%KO_CHANNEL%"/>
             </intent-filter>
         </activity>
         <activity
