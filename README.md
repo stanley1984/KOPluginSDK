@@ -2,8 +2,8 @@
 
 |日期|更新内容|
 | :-----: | :-----: |
-|2016-12-30|增加Manifest.xml的meta-data: KO_CHANNEL|
-|2016-01-04|增加Manifest.xml的ProxyActivity的data配置|
+|2016-12-30|meta-data增加: KO_CHANNEL|
+|2016-01-04|Manifest.xml的ProxyActivity的增加data配置|
 
 ###简介：
 竞技台插件SDK（框架）， 主要提供了在免安装的情况下，运行KO对战游戏的能力。
