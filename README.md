@@ -1,7 +1,7 @@
 ###更新日志
 
 |日期|更新内容|
-| :-----: | -----: |
+| :-----: | :----- |
 |2016-12-30|meta-data增加: KO_CHANNEL|
 |2016-01-04|Manifest.xml的ProxyActivity的增加data配置|
 
