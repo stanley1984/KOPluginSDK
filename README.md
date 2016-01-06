@@ -119,7 +119,7 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
                 <action android:name="cn.vszone.ko.pay.action" />
                 <category android:name="android.intent.category.DEFAULT" />
                 ##此处需要修改替换KO_CHANNEL，与上面的meta-data保持一致
-                <data android:scheme="Plugin_%KO_CHANNEL%"/>
+                <data android:scheme="Plugin_<KO_CHANNEL>"/>
             </intent-filter>
         </activity>
         <activity
