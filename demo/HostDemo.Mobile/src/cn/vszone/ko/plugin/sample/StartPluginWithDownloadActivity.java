@@ -69,7 +69,10 @@ public class StartPluginWithDownloadActivity extends Activity {
         if (!TextUtils.isEmpty(apkFullPath)) {
             File file = new File(apkFullPath);
             if (file.exists()) {
-                PluginOpener.startPlugin(this, apkFullPath, false, new OnPluginLoadListener());
+                Intent intent = new Intent(StartPluginWithDownloadActivity.this, KoLoadPluginActivity.class);
+                intent.putExtra(KoStartUpActivity.KEY_FILE_PATH, mLocalPluginDirPath);
+                intent.putExtra(KoStartUpActivity.KEY_FILE_NAME, mApkFileName);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "插件文件不存在，请先放置到：" + apkFullPath, Toast.LENGTH_LONG).show();
             }
