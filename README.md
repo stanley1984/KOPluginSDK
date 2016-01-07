@@ -2,8 +2,9 @@
 
 |日期|更新内容|
 | :-----: | :----- |
-|2016-01-06|so压缩瘦身到2.8MB|
-|2016-01-04|Manifest.xml的ProxyActivity的增加data配置|
+
+|2016-01-06|1. so压缩瘦身到2.8MB 2. 增加SingleInstanceProxyActivity，支付相关的配置放在这个activity|
+|2016-01-04|Manifest.xml的SingleInstanceProxyActivity的增加data配置|
 |2016-12-30|meta-data增加: KO_CHANNEL|
 
 
@@ -117,13 +118,25 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
             android:process=":koproxy"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        <activity
+            android:name="cn.vszone.ko.plugin.framework.SingleInstanceProxyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:process=":koproxy"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
             <intent-filter>
                 <action android:name="cn.vszone.ko.pay.action" />
+
                 <category android:name="android.intent.category.DEFAULT" />
-                ##此处需要修改替换KO_CHANNEL，与上面的meta-data保持一致
-                <data android:scheme="Plugin_<KO_CHANNEL>"/>
+                
+                ##scheme值为Plugin_连接KO_CHANNEL里的值
+                <data android:scheme="Plugin_partern" />
             </intent-filter>
-        </activity>
+        </activity>        
         <activity
             android:name="cn.vszone.ko.plugin.framework.TranslucentProxyActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|navigation"
