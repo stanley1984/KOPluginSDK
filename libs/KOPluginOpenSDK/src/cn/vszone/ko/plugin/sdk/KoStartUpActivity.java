@@ -36,8 +36,6 @@ import cn.vszone.ko.plugin.sdk.util.SharedPreferenceUtils;
 public class KoStartUpActivity extends Activity {
 
     private static final String          TAG                      = "KoStartUpActivity";
-
-    private static final String          APK_FILE_NAME                     = "KoMobileArena.apk";
     // ===========================================================
     // Constants
     // ===========================================================
@@ -100,13 +98,14 @@ public class KoStartUpActivity extends Activity {
         if (TextUtils.isEmpty(mPluginDir)) {
             mPluginDir = Environment.getExternalStorageDirectory().getAbsolutePath();
         }
+        mApkName = bundle.getString(KEY_FILE_NAME);
         KoDownloadManager.getInstance().init(this);
         String localApkFullPath = null;
         if (mPluginDir != null) {
             if (mPluginDir.endsWith("/")) {
-                localApkFullPath = mPluginDir + APK_FILE_NAME;
+                localApkFullPath = mPluginDir + mApkName;
             } else {
-                localApkFullPath = mPluginDir + "/" + APK_FILE_NAME;
+                localApkFullPath = mPluginDir + "/" + mApkName;
             }
         }
         IntentFilter filter = new IntentFilter(ExitStartUpBroadcastReceiver.FILTER_ACTION);
@@ -246,7 +245,7 @@ public class KoStartUpActivity extends Activity {
     private void downloadPlugin(String pDownloadUrl) {
         if (mDownloadTask == null) {
             mDownloadTask = new KoDownloadManager.Task();
-            mDownloadTask.fileName = APK_FILE_NAME;
+            mDownloadTask.fileName = mApkName;
             mDownloadTask.filePath = mPluginDir;
             mDownloadTask.url = pDownloadUrl;
         }
