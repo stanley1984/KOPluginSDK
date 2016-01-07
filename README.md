@@ -1,11 +1,18 @@
 ###更新日志
 
-|日期|更新内容|
-| :-----: | :----- |
 
-|2016-01-06|1. so压缩瘦身到2.8MB 2. 增加SingleInstanceProxyActivity，支付相关的配置放在这个activity|
-|2016-01-04|Manifest.xml的SingleInstanceProxyActivity的增加data配置|
-|2016-12-30|meta-data增加: KO_CHANNEL|
+**2016-01-06**
+
+1. so压缩瘦身到2.8MB 
+2. 2. 增加SingleInstanceProxyActivity，支付相关的配置放在这个activity
+
+**2016-01-04**
+
+Manifest.xml的SingleInstanceProxyActivity的增加data配置
+
+**2016-12-30**
+
+meta-data增加: KO_CHANNEL
 
 
 ###简介：
