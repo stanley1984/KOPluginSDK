@@ -18,6 +18,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * @author
@@ -122,7 +123,7 @@ public class AppUtils {
     }
 
     /**
-     * 获取应用DC渠道ID
+     * 获取应用KO渠道ID
      *
      * @param pContext
      * @return
@@ -140,11 +141,13 @@ public class AppUtils {
             if (metaDatas != null) {
                 String metaValue = metaDatas.getString(META_DATA_KO_CHANNEL);
                 if (TextUtils.isEmpty(metaValue)) {
-                    throw new Exception("Meta-data (" + META_DATA_KO_CHANNEL + ") is not found int AndroidManifest.xml!");
+                    String errMsg = "Meta-data (" + META_DATA_KO_CHANNEL + ") is not found in the AndroidManifest.xml!";
+                    //Toast.makeText(pContext, errMsg, Toast.LENGTH_LONG).show();
+                    throw new IllegalArgumentException(errMsg);
                 }
                 return metaValue;
             }
-        } catch (Exception e) {
+        } catch (NameNotFoundException e) {
             Log.e(TAG, "getKOChannel.error " + e.toString());
         }
         return channelValue;
