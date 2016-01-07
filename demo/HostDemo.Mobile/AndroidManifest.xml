@@ -113,24 +113,9 @@
         android:largeHeap="true"
         android:persistent="true"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
-        
-        <!--这里填写release 对应的app_key 
-        <meta-data
-            android:name="KO_APP_KEY"
-            android:value="7NxHYkMUTi9l9z5wPxjQX/kKPa4XChRN6UpaMyzUQ7E/X1ZJAmPFQZ0VYfmDYUsgCgcMPM2CsNj8Xajqty3THw==" />
-        -->
-        <!--这里填写debug 对应的app_key -->
-        <!-- 如果打release包的话value 用上面的  如果debug包就用下面的value -->
 
-        <meta-data
-             ###集成到项目中， 这里需要修改
-            android:name="KO_APP_KEY"
-            android:value="dE0oRhauOX75w0bEXvb29htNM6QQ6IjT91OO3uiK4/tW7gU7+PKAxNlof7k0hWxDHEj28R6TMFIFCv2vbb7hgw==" />
-
-        <!-- 这里填写debug 对应的app_key -->
-        
-        <meta-data
-            android:name="KO_APP_ID"
+		<meta-data
+            android:name="KO_CHANNEL"
             ###集成到项目中， 这里需要修改
             android:value="partern" />
 
@@ -172,8 +157,8 @@
                 <action android:name="cn.vszone.ko.pay.action" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                
-                <data android:scheme="值同KO_APP_ID里的值一样" />
+                ##scheme值为Plugin_连接KO_CHANNEL里的值
+                <data android:scheme="Plugin_partern" />
             </intent-filter>
         </activity>
         <activity
