@@ -150,10 +150,7 @@ public class AppUtils {
             if (metaDatas != null) {
                 String metaValue = metaDatas.getString(META_DATA_KO_CHANNEL);
                 if (TextUtils.isEmpty(metaValue)) {
-                    metaValue = metaDatas.getString(META_DATA_KO_APP_ID);
-                }
-                if (TextUtils.isEmpty(metaValue)) {
-                    metaValue = metaDatas.getString(META_DATA_UMENG_CHANNEL);
+                    throw new Exception("Meta-data (" + META_DATA_KO_CHANNEL + ") is not found int AndroidManifest.xml!");
                 }
                 return metaValue;
             }
