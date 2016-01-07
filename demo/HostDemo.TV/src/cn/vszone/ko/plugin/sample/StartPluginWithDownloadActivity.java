@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import cn.vszone.ko.plugin.framework.PluginLoadListener;
 import cn.vszone.ko.plugin.framework.utils.PluginOpener;
+import cn.vszone.ko.plugin.sdk.KoLoadPluginActivity;
 import cn.vszone.ko.plugin.sdk.KoStartUpActivity;
 import cn.vszone.ko.plugin.sdk.misc.BranchConfig;
 
@@ -92,7 +93,10 @@ public class StartPluginWithDownloadActivity extends Activity {
             File file = new File(apkFullPath);
             if (file.exists()) {
                 ## 如果自行处理插件下载，下载好后自己调用该方法：mUseHostNativeLibs 一般为false， 如果宿主已经包含了插件的所有so，设置为true
-                PluginOpener.startPlugin(this, apkFullPath, mUseHostNativeLibs, new OnPluginLoadListener());
+                Intent intent = new Intent(StartPluginWithDownloadActivity.this, KoLoadPluginActivity.class);
+                intent.putExtra(KoStartUpActivity.KEY_FILE_PATH, mLocalPluginDirPath);
+                intent.putExtra(KoStartUpActivity.KEY_FILE_NAME, mApkFileName);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "插件文件不存在，请先放置到：" + apkFullPath, Toast.LENGTH_LONG).show();
             }
