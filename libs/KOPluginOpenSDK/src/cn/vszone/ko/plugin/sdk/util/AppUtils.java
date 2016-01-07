@@ -32,16 +32,6 @@ public class AppUtils {
     private static final String META_DATA_KO_STAT_KEY     = "KO_STAT_KEY";
     private static final String META_DATA_KO_CHANNEL      = "KO_CHANNEL";
 
-    /**
-     * 只做兼容老版本之用
-     */
-    @Deprecated
-    private static final String META_DATA_UMENG_CHANNEL   = "UMENG_CHANNEL";
-    /**
-     * 只做兼容老版本之用
-     */
-    @Deprecated
-    private static final String META_DATA_KO_APP_ID       = "KO_APP_ID";
     public static final String  META_DATA_KO_APPKEY       = "KO_APP_KEY";
     public static final String  META_DATA_KO_APPKEY_DEBUG = "KO_APP_KEY_DEBUG";
     public static final String  UNKNOWN_VERSION_NAME      = "UNKNOWN";
