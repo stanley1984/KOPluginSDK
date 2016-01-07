@@ -153,12 +153,24 @@
             android:exported="true"
             android:label="@string/app_name"
             android:process=":koproxy"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        <activity
+            android:name="cn.vszone.ko.plugin.framework.SingleInstanceProxyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:process=":koproxy"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateUnchanged|adjustPan" >
             <intent-filter>
                 <action android:name="cn.vszone.ko.pay.action" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+                
+                <data android:scheme="值同KO_APP_ID里的值一样" />
             </intent-filter>
         </activity>
 		<activity
