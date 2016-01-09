@@ -114,7 +114,7 @@ public class KoStartUpActivity extends Activity {
         registerReceiver(mRec, filter);
 
         String downloadUrl = bundle.getString(KEY_DOWNLOAD_URL);
-        if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOPartnerAppId(getApplicationContext()))){
+        if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))){
             
             // 设置背景图：
             mStartBgImageView.setImageResource(R.drawable.ko_startup_bg_189store);
@@ -140,7 +140,7 @@ public class KoStartUpActivity extends Activity {
     
     private String getDefaultDownloadApkUrl(){
         String downloadUrl = null;
-        if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOPartnerAppId(getApplicationContext()))){
+        if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))){
             downloadUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
         }
         if(BranchConfig.isTvArena){

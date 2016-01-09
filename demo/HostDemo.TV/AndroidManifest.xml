@@ -115,21 +115,10 @@
         android:persistent="true"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
         
-        <!--这里填写release 对应的app_key 
         <meta-data
-            android:name="KO_APP_KEY"
-            android:value="7NxHYkMUTi9l9z5wPxjQX/kKPa4XChRN6UpaMyzUQ7E/X1ZJAmPFQZ0VYfmDYUsgCgcMPM2CsNj8Xajqty3THw==" />
-        -->
-        <!--这里填写debug 对应的app_key -->
-        <!-- 如果打release包的话value 用上面的  如果debug包就用下面的value -->
-        <meta-data
-            android:name="KO_APP_KEY"
-            android:value="dE0oRhauOX75w0bEXvb29htNM6QQ6IjT91OO3uiK4/tW7gU7+PKAxNlof7k0hWxDHEj28R6TMFIFCv2vbb7hgw==" />
-            
-        <!--这里填写debug 对应的app_key -->
-        <meta-data
-            android:name="KO_APP_ID"
-            android:value="Tencent_TVGame" />
+            android:name="KO_CHANNEL"
+            ###集成到项目中， 这里需要修改
+            android:value="partern" />
 
         <activity
             android:name="cn.vszone.ko.plugin.sdk.KoStartUpActivity"
@@ -153,12 +142,24 @@
             android:exported="true"
             android:label="@string/app_name"
             android:process=":koproxy"
-            android:screenOrientation="landscape"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" >
+        </activity>
+        <activity
+            android:name="cn.vszone.ko.plugin.framework.SingleInstanceProxyActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:process=":koproxy"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateUnchanged|adjustPan" >
             <intent-filter>
                 <action android:name="cn.vszone.ko.pay.action" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+                ##scheme值为Plugin_连接KO_CHANNEL里的值
+                <data android:scheme="Plugin_partern" />
             </intent-filter>
         </activity>
 		<activity

@@ -15,10 +15,13 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
+import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
- * @author 
+ * @author
  * @Create at 2014-6-25 下午5:45:19
  * @Version 1.0
  */
@@ -26,13 +29,16 @@ public class AppUtils {
     // ===========================================================
     // Constants
     // ===========================================================
-    private static final String TAG                     = "AppUtils";
-    private static final String META_DATA_UMENG_CHANNEL = "UMENG_CHANNEL";
-    private static final String META_DATA_KO_ID         = "KO_APP_ID";
-    public static final String  META_DATA_KO_APPKEY     = "KO_APP_KEY";
-    public static final String  UNKNOWN_VERSION_NAME    = "UNKNOWN";
-    public static final int     UNKNOWN_VERSION_CODE    = -1;
-    public static final String  UMENG_CHANNEL_UNKNOWN   = "UNKNOWN";
+    private static final String TAG                       = "AppUtils";
+    private static final String META_DATA_KO_STAT_KEY     = "KO_STAT_KEY";
+    private static final String META_DATA_KO_CHANNEL      = "KO_CHANNEL";
+
+    public static final String  META_DATA_KO_APPKEY       = "KO_APP_KEY";
+    public static final String  META_DATA_KO_APPKEY_DEBUG = "KO_APP_KEY_DEBUG";
+    public static final String  UNKNOWN_VERSION_NAME      = "UNKNOWN";
+    public static final int     UNKNOWN_VERSION_CODE      = -1;
+    public static final String  KO_CHANNEL_UNKNOWN        = "UNKNOWN";
+    public static final String  KO_STAT_KEY_UNKNOWN       = "UNKNOWN";
 
     // ===========================================================
     // Fields
@@ -66,7 +72,7 @@ public class AppUtils {
         try {
             packageInfo = packageManager.getPackageInfo(pContext.getPackageName(), 0);
         } catch (NameNotFoundException e) {
-             Log.e(TAG, "initVersionInfo.error " + e.toString());
+            Log.e(TAG, "initVersionInfo.error " + e.toString());
         }
         if (packageInfo != null) {
             return packageInfo.versionName;
@@ -88,7 +94,7 @@ public class AppUtils {
         try {
             packageInfo = packageManager.getPackageInfo(pContext.getPackageName(), 0);
         } catch (NameNotFoundException e) {
-             Log.e(TAG, "initVersionInfo.error " + e.toString());
+            Log.e(TAG, "initVersionInfo.error " + e.toString());
         }
         if (packageInfo != null) {
             return packageInfo.versionCode;
@@ -97,39 +103,54 @@ public class AppUtils {
         }
     }
 
-
-    public static final String getUmengChannel(Context pContext) {
-        try {
-            ApplicationInfo applicationInfo =
-                pContext.getPackageManager().getApplicationInfo(pContext.getPackageName(),
-                    PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA);
-            if (applicationInfo.metaData != null) {
-                return applicationInfo.metaData.getString(META_DATA_UMENG_CHANNEL);
-            }
-        } catch (Exception e) {
-             Log.e(TAG, "initUmengChannel.error " + e.toString());
-        }
-        return UMENG_CHANNEL_UNKNOWN;
-    }
-
     /**
-     * 获取与KO对战频道合作的第三方应用对应的AppId
-     * 
+     * 获取应用DC渠道ID
+     *
      * @param pContext
      * @return
      */
-    public static final String getKOPartnerAppId(Context pContext) {
+    public static final String getKOStatKey(Context pContext, String pPackageName) {
         try {
-            ApplicationInfo applicationInfo =
-                pContext.getPackageManager().getApplicationInfo(pContext.getPackageName(),
-                    PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA);
+            ApplicationInfo applicationInfo = pContext.getPackageManager().getApplicationInfo(pPackageName,
+                PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA);
             if (applicationInfo.metaData != null) {
-                return applicationInfo.metaData.getString(META_DATA_KO_ID);
+                return applicationInfo.metaData.getString(META_DATA_KO_STAT_KEY);
             }
         } catch (Exception e) {
-             Log.e(TAG, "initKOChannel.error " + e.toString());
+            Log.e(TAG, "getKOStatKey.error " + e.toString());
         }
-        return "";
+        return KO_STAT_KEY_UNKNOWN;
+    }
+
+    /**
+     * 获取应用KO渠道ID
+     *
+     * @param pContext
+     * @return
+     */
+    public static String getKOChannel(Context pContext) {
+        return getKOChannel(pContext, pContext.getPackageName());
+    }
+
+    public static final String getKOChannel(Context pContext, String pPackageName) {
+        String channelValue = KO_CHANNEL_UNKNOWN;
+        try {
+            ApplicationInfo applicationInfo = pContext.getPackageManager().getApplicationInfo(pPackageName,
+                PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA);
+            Bundle metaDatas = applicationInfo.metaData;
+            if (metaDatas != null) {
+                String metaValue = metaDatas.getString(META_DATA_KO_CHANNEL);
+                if (TextUtils.isEmpty(metaValue)) {
+                    String errMsg = "Meta-data (" + META_DATA_KO_CHANNEL + ") is not found in the AndroidManifest.xml!";
+                    //Toast.makeText(pContext, errMsg, Toast.LENGTH_LONG).show();
+                    throw new IllegalArgumentException(errMsg);
+                }
+                return metaValue;
+            }
+        } catch (NameNotFoundException e) {
+            Log.e(TAG, "getKOChannel.error " + e.toString());
+        }
+        return channelValue;
     }
 
     /**
@@ -140,14 +161,19 @@ public class AppUtils {
      */
     public static final String getKOPartnerAppKey(Context pContext) {
         try {
-            ApplicationInfo applicationInfo =
-                pContext.getPackageManager().getApplicationInfo(pContext.getPackageName(),
-                    PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA);
-            if (applicationInfo.metaData != null) { 
-                return applicationInfo.metaData.getString(META_DATA_KO_APPKEY); 
-             }
+            ApplicationInfo applicationInfo = pContext.getPackageManager().getApplicationInfo(pContext.getPackageName(),
+                PackageManager.GET_ACTIVITIES | PackageManager.GET_META_DATA);
+            String metaDataAppKey = null;
+            // if (BuildConfig.DEBUG) {
+            // metaDataAppKey = META_DATA_KO_APPKEY_DEBUG;
+            // } else {
+            metaDataAppKey = META_DATA_KO_APPKEY;
+            // }
+            if (applicationInfo.metaData != null) {
+                return applicationInfo.metaData.getString(metaDataAppKey);
+            }
         } catch (Exception e) {
-             Log.e(TAG, "initKOChannel.error " + e.toString());
+            Log.e(TAG, "initKOChannel.error " + e.toString());
         }
         return "";
     }
@@ -160,7 +186,7 @@ public class AppUtils {
     public static boolean isJellyBeanUpperVersion() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
-    
+
     /**
      * Android 系统是否在4.2及以上(Api Code >=17)
      * 
@@ -201,13 +227,14 @@ public class AppUtils {
         }
         return "";
     }
-    
+
     /**
      * 根据包名判断该应用是否处在当前界面
+     * 
      * @param packageName
      * @return
      */
-    public static boolean isAppOnForeground(Context pContext,String packageName) {
+    public static boolean isAppOnForeground(Context pContext, String packageName) {
         ActivityManager activityManager = (ActivityManager) pContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningTaskInfo> tasksInfo = activityManager.getRunningTasks(1);
         if (tasksInfo.size() > 0) {
@@ -218,12 +245,14 @@ public class AppUtils {
         }
         return false;
     }
+
     /**
-     *  根据包名判断该应用是否已经启动
+     * 根据包名判断该应用是否已经启动
+     * 
      * @param packageName
      * @return
      */
-    public static boolean isAppStart(Context pContext,String packageName) {
+    public static boolean isAppStart(Context pContext, String packageName) {
         ActivityManager activityManager = (ActivityManager) pContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<RunningTaskInfo> tasksInfo = activityManager.getRunningTasks(100);
         for (RunningTaskInfo runningTaskInfo : tasksInfo) {
@@ -233,7 +262,7 @@ public class AppUtils {
         }
         return false;
     }
-    
+
     /**
      * 用来判断服务是否运行.
      * 
@@ -257,8 +286,6 @@ public class AppUtils {
         }
         return isRunning;
     }
-
-
 
     // ===========================================================
     // Inner and Anonymous Classes

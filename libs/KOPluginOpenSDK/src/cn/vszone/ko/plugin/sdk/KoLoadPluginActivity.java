@@ -68,7 +68,7 @@ public class KoLoadPluginActivity extends Activity {
     // ===========================================================
     private void loadPlugin() {
         boolean useHostNativeLibs = false;
-        if (PartnerAppIDs.APP_ID_XIAOMI.equalsIgnoreCase(AppUtils.getKOPartnerAppId(getApplicationContext()))) {
+        if (PartnerAppIDs.APP_ID_XIAOMI.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))) {
             useHostNativeLibs = true;
         }
         File file = new File(mPluginDir + "/" + mApkName);
