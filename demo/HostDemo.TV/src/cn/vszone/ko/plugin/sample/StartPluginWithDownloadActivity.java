@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import cn.vszone.ko.plugin.framework.PluginLoadListener;
 import cn.vszone.ko.plugin.framework.utils.PluginOpener;
+import cn.vszone.ko.plugin.sdk.KoLoadPluginActivity;
 import cn.vszone.ko.plugin.sdk.KoStartUpActivity;
 import cn.vszone.ko.plugin.sdk.misc.BranchConfig;
 
@@ -19,16 +20,16 @@ public class StartPluginWithDownloadActivity extends Activity {
 
     private final static String LOG_TAG             = "PluginDemo";
 
-     ##首先， 请务必正确设置AndroidManifest.xml的 KO_APP_KEY，KO_APP_ID，具体参考文档
+//     ##首先， 请务必正确设置AndroidManifest.xml的 KO_APP_KEY，KO_APP_ID，具体参考文档
 
-     ##插件文件名
+//     ##插件文件名
     private String              mApkFileName        = "";
-     ##插件在本地sdcard的目录
+//     ##插件在本地sdcard的目录
     private String              mLocalPluginDirPath = "";
-    ##插件文件名下载地址，针对方案2需要设置
+//    ##插件文件名下载地址，针对方案2需要设置
     private String              mPluginDownloadUrl  = "";
 
-    ##是否让插件直接使用宿主的so
+//    ##是否让插件直接使用宿主的so
     private boolean             mUseHostNativeLibs  = true;
 
     private Button              mStartLocal;
@@ -91,7 +92,7 @@ public class StartPluginWithDownloadActivity extends Activity {
         if (!TextUtils.isEmpty(apkFullPath)) {
             File file = new File(apkFullPath);
             if (file.exists()) {
-                ## 如果自行处理插件下载，下载好后自己调用该方法：mUseHostNativeLibs 一般为false， 如果宿主已经包含了插件的所有so，设置为true
+//                ## 如果自行处理插件下载，下载好后自己调用该方法：mUseHostNativeLibs 一般为false， 如果宿主已经包含了插件的所有so，设置为true
                 Intent intent = new Intent(StartPluginWithDownloadActivity.this, KoLoadPluginActivity.class);
                 intent.putExtra(KoStartUpActivity.KEY_FILE_PATH, mLocalPluginDirPath);
                 intent.putExtra(KoStartUpActivity.KEY_FILE_NAME, mApkFileName);
