@@ -113,10 +113,10 @@
         android:largeHeap="true"
         android:persistent="true"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+        
+        <meta-data
 
-		<meta-data
             android:name="KO_CHANNEL"
-            ###集成到项目中， 这里需要修改
             android:value="partern" />
 
         <activity
