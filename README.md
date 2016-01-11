@@ -131,8 +131,8 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
                 <action android:name="cn.vszone.ko.pay.action" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-                ##scheme值为Plugin_连接KO_CHANNEL里的值
-                <data android:scheme="Plugin_partern" />
+                ##scheme值为Plugin_连接KO_CHANNEL里的值, 例如：KO_CHANNEL的值为gfan, 这里填Plugin_gfan
+                <data android:scheme="Plugin_<KO_CHANNEL>" />
             </intent-filter>
         </activity>        
         <activity
