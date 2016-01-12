@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 
 /**
@@ -77,14 +78,17 @@ public class VSBuildConfig {
      * @return true 插件加载处于测试模式， 如果是，将使用本地的插件包进行加载，否则使用网上下载最新的插件包进行加载
      */
     public static boolean isInPluginTestMode() {
+        checkConfigsInited();
         return isInPluginTestMode;
     }
 
     public static int getTestMode() {
+        checkConfigsInited();
         return testMode;
     }
     
     public static boolean isInTestMode() {
+        checkConfigsInited();
         return testMode > 0;
     }
 
@@ -100,6 +104,13 @@ public class VSBuildConfig {
     // ===========================================================
     // Methods
     // ===========================================================
+    
+    private static boolean checkConfigsInited(){
+        if(TextUtils.isEmpty(buildConfigPath)){
+            throw new IllegalArgumentException("buildConfigPath is not set, did you forget to call initConfigs()?");
+        }
+        return true;
+    }
     
     /**
      * 判断SD卡是否可用
