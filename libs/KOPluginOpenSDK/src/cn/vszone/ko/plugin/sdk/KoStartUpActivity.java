@@ -41,9 +41,8 @@ import cn.vszone.ko.plugin.sdk.util.SharedPreferenceUtils;
 
 public class KoStartUpActivity extends Activity {
 
-    private static final String          TAG                      = "KoStartUpActivity";
+    private static final String          TAG                               = "KoStartUpActivity";
 
-    private static final String          APK_FILE_NAME                     = "KoMobileArena.apk";
     // ===========================================================
     // Constants
     // ===========================================================
@@ -53,12 +52,12 @@ public class KoStartUpActivity extends Activity {
     public static final String           KEY_DOWNLOAD_URL                  = "key_download_URL";
     public static final String           KEY_FILE_PATH                     = "key_file_path";
     public static final String           KEY_FILE_NAME                     = "key_file_name";
-	public static final String			 KEY_START_TIME 				   = "startTime";
+    public static final String           KEY_START_TIME                    = "startTime";
     public static final String           KEY_TODAY                         = "today";
     public static final String           DEFAULT_APK_DOENLOAD_URL_189STORE =
         "http://download.vszone.cn/android/KoMobileArena_189store_latest.apk";
-    public static final String           DEFAULT_APK_DOENLOAD_URL_TV =
-            "http://download.vszone.cn/android/KoTvArena_kobox_latest.apk";
+    public static final String           DEFAULT_APK_DOENLOAD_URL_TV       =
+        "http://download.vszone.cn/android/KoTvArena_kobox_latest.apk";
     // ===========================================================
     // Fields
     // ===========================================================
@@ -69,7 +68,7 @@ public class KoStartUpActivity extends Activity {
     private TextView                     mStatusTipTv;
     private String                       mPluginDir;
     private String                       m186StoreRequestUrl;
-    //private String                       mDownloadUrl;
+    // private String mDownloadUrl;
     private ImageView                    mStartBgImageView;
     // 实际要下载的url
     private String                       mApkUrl;
@@ -77,17 +76,17 @@ public class KoStartUpActivity extends Activity {
     private DownloadListener             mDownloadListener;
     private KoDownloadManager.Task       mDownloadTask;
 
-    private boolean                      mIsBackFromSetting       = false;
-    private boolean                      isHasAPKFile             = false;
+    private boolean                      mIsBackFromSetting                = false;
+    private boolean                      isHasAPKFile                      = false;
 
-    private ExitStartUpBroadcastReceiver mRec                     = null;
+    private ExitStartUpBroadcastReceiver mRec                              = null;
 
-    private String                       mApkName                 = "KoMobileArena.apk";
-    
-    private static final String DCKEY="85409328C0493F4219A18E27A544383D";
-    private long mStartTime=0;
-    private long mFetchDownloadUrlStartTime=0;
-    private long mDownloadStartTime=0;
+    private String                       mApkName                          = "KoMobileArena.apk";
+
+    private static final String          DCKEY                             = "85409328C0493F4219A18E27A544383D";
+    private long                         mStartTime                        = 0;
+    private long                         mFetchDownloadUrlStartTime        = 0;
+    private long                         mDownloadStartTime                = 0;
 
     // ===========================================================
     // Constructors
@@ -107,59 +106,63 @@ public class KoStartUpActivity extends Activity {
         DCAgent.setDebugMode(true);
         DCAgent.setReportMode(DCReportMode.DC_DEFAULT);
         DCAgent.initConfig(getApplicationContext(), DCKEY, AppUtils.getKOChannel(getApplicationContext()));
-        mStartTime=System.currentTimeMillis();
+        mStartTime = System.currentTimeMillis();
         overridePendingTransition(0, 0);
         setContentView(R.layout.ko_start_up_activity);
         initView();
         Bundle bundle = getIntent().getExtras();
-        mPluginDir = bundle.getString(KEY_FILE_PATH);
-        if (TextUtils.isEmpty(mPluginDir)) {
-            mPluginDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-        }
-        KoDownloadManager.getInstance().init(this);
-        String localApkFullPath = null;
-        if (mPluginDir != null) {
-            if (mPluginDir.endsWith("/")) {
-                localApkFullPath = mPluginDir + APK_FILE_NAME;
-            } else {
-                localApkFullPath = mPluginDir + "/" + APK_FILE_NAME;
+        if (bundle != null) {
+            mPluginDir = bundle.getString(KEY_FILE_PATH);
+            mApkName = bundle.getString(KEY_FILE_NAME);
+            if (TextUtils.isEmpty(mPluginDir)) {
+                mPluginDir = Environment.getExternalStorageDirectory().getAbsolutePath();
             }
-        }
-        IntentFilter filter = new IntentFilter(ExitStartUpBroadcastReceiver.FILTER_ACTION);
-        mRec = new ExitStartUpBroadcastReceiver(this);
-        registerReceiver(mRec, filter);
-
-        String downloadUrl = bundle.getString(KEY_DOWNLOAD_URL);
-        if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))){
-            
-            // 设置背景图：
-            mStartBgImageView.setImageResource(R.drawable.ko_startup_bg_189store);
-            // 设置地址
-            m186StoreRequestUrl = downloadUrl;
-            if (TextUtils.isEmpty(m186StoreRequestUrl) || VSBuildConfig.isInPluginTestMode()) {
-                mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
-                startPlugin(mApkUrl);
-            } else {
-                if (!isToday()) {
-                    requestDownloadUrlFrom189Store(localApkFullPath);
+            KoDownloadManager.getInstance().init(this);
+            String localApkFullPath = null;
+            if (mPluginDir != null) {
+                if (mPluginDir.endsWith("/")) {
+                    localApkFullPath = mPluginDir + mApkName;
                 } else {
-                    mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
-                    startPlugin(mApkUrl);
+                    localApkFullPath = mPluginDir + "/" + mApkName;
                 }
             }
-        } else {
-            mApkUrl = downloadUrl;
-            startPlugin(mApkUrl);
-        }
+            IntentFilter filter = new IntentFilter(ExitStartUpBroadcastReceiver.FILTER_ACTION);
+            mRec = new ExitStartUpBroadcastReceiver(this);
+            registerReceiver(mRec, filter);
 
+            String downloadUrl = bundle.getString(KEY_DOWNLOAD_URL);
+            if (PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))) {
+
+                // 设置背景图：
+                mStartBgImageView.setImageResource(R.drawable.ko_startup_bg_189store);
+                // 设置地址
+                m186StoreRequestUrl = downloadUrl;
+                if (TextUtils.isEmpty(m186StoreRequestUrl) || VSBuildConfig.isInPluginTestMode()) {
+                    mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
+                    startPlugin(mApkUrl);
+                } else {
+                    if (!isToday()) {
+                        requestDownloadUrlFrom189Store(localApkFullPath);
+                    } else {
+                        mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
+                        startPlugin(mApkUrl);
+                    }
+                }
+            } else {
+                mApkUrl = downloadUrl;
+                startPlugin(mApkUrl);
+            }
+        } else {
+            throw new NullPointerException("Extras is NULL in Intent.");
+        }
     }
-    
-    private String getDefaultDownloadApkUrl(){
+
+    private String getDefaultDownloadApkUrl() {
         String downloadUrl = null;
-        if(PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))){
+        if (PartnerAppIDs.APP_ID_189STORE.equalsIgnoreCase(AppUtils.getKOChannel(getApplicationContext()))) {
             downloadUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
         }
-        if(BranchConfig.isTvArena){
+        if (BranchConfig.isTvArena) {
             downloadUrl = DEFAULT_APK_DOENLOAD_URL_TV;
         }
         return downloadUrl;
@@ -173,20 +176,20 @@ public class KoStartUpActivity extends Activity {
     private void requestDownloadUrlFrom189Store(String localApkFullPath) {
         updateProgress(STEP_DOWNLOADING, 0);
         CET189storeUrlFetcher urlFetcher = new CET189storeUrlFetcher();
-        mFetchDownloadUrlStartTime=System.currentTimeMillis();
+        mFetchDownloadUrlStartTime = System.currentTimeMillis();
         urlFetcher.fetchDownloadUrl(this, m186StoreRequestUrl, localApkFullPath, new FetchDownloadUrlCallback() {
 
             @Override
             public void onSuccess(String oldApkHash, String pNewApkHash, String pApkUrl) {
-            	
+
                 Log.d("fetchDownloadUrl", "pApkUrl:" + pApkUrl);
                 Log.d("fetchDownloadUrl", "oldApkHash: " + oldApkHash + ",pNewApkHash:" + pNewApkHash);
-                boolean needDownload=false;
+                boolean needDownload = false;
                 if (!TextUtils.isEmpty(pApkUrl)) {
                     mApkUrl = pApkUrl;
                     if (TextUtils.isEmpty(oldApkHash) || !oldApkHash.equals(pNewApkHash)) {
                         // 下载或者升级
-                    	needDownload=true;
+                        needDownload = true;
                         downloadPlugin(mApkUrl);
                     } else {
                         startPlugin(mApkUrl);
@@ -196,28 +199,28 @@ public class KoStartUpActivity extends Activity {
                     mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
                     startPlugin(mApkUrl);
                 }
-              //埋点 统计请求下载成功结果：
-                Map<String,String> map=new HashMap<String,String>();
+                // 埋点 统计请求下载成功结果：
+                Map<String, String> map = new HashMap<String, String>();
                 map.put("186StoreRequestUrl", m186StoreRequestUrl);
                 map.put("result", "success");
                 map.put("apkDownloadUrl", pApkUrl);
                 map.put("oldApkHash", oldApkHash);
                 map.put("pNewApkHash", pNewApkHash);
-                map.put("needDownload", ""+needDownload);
-                long duration=System.currentTimeMillis()-mFetchDownloadUrlStartTime;
-                map.put("duration", ""+duration);
+                map.put("needDownload", "" + needDownload);
+                long duration = System.currentTimeMillis() - mFetchDownloadUrlStartTime;
+                map.put("duration", "" + duration);
                 DCEvent.onEvent("fetchDownloadUrl", map);
             }
 
             @Override
             public void onFailure(Throwable error, String content) {
                 Log.e("TAG", "onFailure:" + error.toString());
-                Map<String,String> map=new HashMap<String,String>();
+                Map<String, String> map = new HashMap<String, String>();
                 map.put("186StoreRequestUrl", m186StoreRequestUrl);
                 map.put("result", "fail");
                 map.put("erroMsg", error.getMessage());
-                long duration=System.currentTimeMillis()-mFetchDownloadUrlStartTime;
-                map.put("duration", ""+duration);
+                long duration = System.currentTimeMillis() - mFetchDownloadUrlStartTime;
+                map.put("duration", "" + duration);
                 DCEvent.onEvent("fetchDownloadUrl", map);
                 // 请求天翼的下载链接失败后，则直接下载KO服务端的APK包
                 mApkUrl = DEFAULT_APK_DOENLOAD_URL_189STORE;
@@ -229,7 +232,7 @@ public class KoStartUpActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-         Log.d("DCLOG", "onResume"+getClass().getSimpleName());
+        Log.d("DCLOG", "onResume" + getClass().getSimpleName());
         DCAgent.onResume(this);
         if (mIsBackFromSetting) {
             if (!TextUtils.isEmpty(mApkUrl)) {
@@ -241,7 +244,7 @@ public class KoStartUpActivity extends Activity {
 
     @Override
     protected void onPause() {
-    	Log.d("DCLOG", "onPause"+getClass().getSimpleName());
+        Log.d("DCLOG", "onPause" + getClass().getSimpleName());
         Log.d("KoStartUpActivity", "onPause");
         super.onPause();
         DCAgent.onResume(this);
@@ -251,8 +254,8 @@ public class KoStartUpActivity extends Activity {
     protected void onStop() {
         Log.d("KoStartUpActivity", "onStop");
         super.onStop();
-        if(!mIsBackFromSetting){
-        	exit(true);
+        if (!mIsBackFromSetting) {
+            exit(true);
         }
     }
 
@@ -290,14 +293,14 @@ public class KoStartUpActivity extends Activity {
     private void downloadPlugin(String pDownloadUrl) {
         if (mDownloadTask == null) {
             mDownloadTask = new KoDownloadManager.Task();
-            mDownloadTask.fileName = APK_FILE_NAME;
+            mDownloadTask.fileName = mApkName;
             mDownloadTask.filePath = mPluginDir;
             mDownloadTask.url = pDownloadUrl;
         }
         if (mDownloadListener == null) {
             mDownloadListener = new DownloadListener(this);
         }
-        mDownloadStartTime=System.currentTimeMillis();
+        mDownloadStartTime = System.currentTimeMillis();
         SharedPreferenceUtils.setInt(getApplicationContext(), KEY_TODAY, getToday());
         KoDownloadManager.getInstance().setDownloadListener(mDownloadListener);
         KoDownloadManager.getInstance().addDownloadTask(KoDownloadManager.MODE_HTTP, mDownloadTask);
@@ -310,9 +313,9 @@ public class KoStartUpActivity extends Activity {
         if (mResources == null) {
             mResources = getResources();
         }
-        String erroMsg=null;
+        String erroMsg = null;
         if (NetWorkManager.hasNetWork(getApplicationContext())) {
-        	erroMsg=mResources.getString(R.string.ko_download_plugin_download_fail);
+            erroMsg = mResources.getString(R.string.ko_download_plugin_download_fail);
             mDialog.setMessage(mResources.getString(R.string.ko_download_plugin_download_fail));
             mDialog.addLeftButton(mResources.getString(R.string.ko_exit), new OnClickListener() {
 
@@ -331,13 +334,13 @@ public class KoStartUpActivity extends Activity {
                 }
             });
         } else {
-        	erroMsg=mResources.getString(R.string.ko_network_connect_fail);
+            erroMsg = mResources.getString(R.string.ko_network_connect_fail);
             mDialog.setMessage(getResources().getString(R.string.ko_network_connect_fail));
             mDialog.addLeftButton(mResources.getString(R.string.ko_network_setting), new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                	mIsBackFromSetting = true;
+                    mIsBackFromSetting = true;
                     Intent intent = new Intent(Settings.ACTION_WIFI_SETTINGS);
                     startActivity(intent);
                 }
@@ -354,12 +357,12 @@ public class KoStartUpActivity extends Activity {
         }
         mDialog.show();
         mDialog.initView();
-        //埋点 统计下载 失败：
-        Map<String,String> map=new HashMap<String,String>();
-        long endTime=System.currentTimeMillis();
-        long duration=endTime-mDownloadStartTime;
-        map.put("startTime", ""+mDownloadStartTime);
-        map.put("duration", ""+duration);
+        // 埋点 统计下载 失败：
+        Map<String, String> map = new HashMap<String, String>();
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - mDownloadStartTime;
+        map.put("startTime", "" + mDownloadStartTime);
+        map.put("duration", "" + duration);
         map.put("result", "fail");
         map.put("erroMsg", erroMsg);
         DCEvent.onEvent("downloadPlugin", map);
@@ -448,11 +451,11 @@ public class KoStartUpActivity extends Activity {
         public void changeStatus(Task pTask) {
             Log.d("TAG", "changeStatus:" + pTask.status);
             if (pTask.status == Task.STATUS_DOWNLOADED) {
-                //埋点 统计下载 成功：
-                Map<String,String> map=new HashMap<String,String>();
-                long endTime=System.currentTimeMillis();
-                map.put("startTime", ""+mDownloadStartTime);
-                map.put("duration", ""+(endTime-mDownloadStartTime));
+                // 埋点 统计下载 成功：
+                Map<String, String> map = new HashMap<String, String>();
+                long endTime = System.currentTimeMillis();
+                map.put("startTime", "" + mDownloadStartTime);
+                map.put("duration", "" + (endTime - mDownloadStartTime));
                 map.put("result", "success");
                 map.put("downloadUrl", mApkUrl);
                 DCEvent.onEvent("downloadPlugin", map);
@@ -492,17 +495,17 @@ public class KoStartUpActivity extends Activity {
     }
 
     public void exit(boolean isStart) {
-    	//埋点 统计启动：
-        Map<String,String> map=new HashMap<String,String>();
-        long endTime=System.currentTimeMillis();
-        map.put("startTime", ""+mStartTime);
-        map.put("endTime", ""+endTime);
-        map.put("duration", ""+(endTime-mStartTime));
-        if(isStart){
-        	map.put("result", "success");
-        }else{
-        	map.put("result", "fail");
-        	map.put("erro", "cancal");
+        // 埋点 统计启动：
+        Map<String, String> map = new HashMap<String, String>();
+        long endTime = System.currentTimeMillis();
+        map.put("startTime", "" + mStartTime);
+        map.put("endTime", "" + endTime);
+        map.put("duration", "" + (endTime - mStartTime));
+        if (isStart) {
+            map.put("result", "success");
+        } else {
+            map.put("result", "fail");
+            map.put("erro", "cancal");
         }
         DCEvent.onEvent("start", map);
         if (mRec != null) {
@@ -543,7 +546,7 @@ public class KoStartUpActivity extends Activity {
                 KoStartUpActivity activity = mWeakReference.get();
                 if (activity != null) {
                     activity.exit(true);
-                } 
+                }
                 mWeakReference.clear();
                 mWeakReference = null;
             }
