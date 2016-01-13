@@ -113,9 +113,12 @@ public class KoStartUpActivity extends Activity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             mPluginDir = bundle.getString(KEY_FILE_PATH);
-            mApkName = bundle.getString(KEY_FILE_NAME);
+            String name = bundle.getString(KEY_FILE_NAME);
             if (TextUtils.isEmpty(mPluginDir)) {
                 mPluginDir = Environment.getExternalStorageDirectory().getAbsolutePath();
+            }
+            if(!TextUtils.isEmpty(name)){
+            	mApkName=name;
             }
             KoDownloadManager.getInstance().init(this);
             String localApkFullPath = null;
