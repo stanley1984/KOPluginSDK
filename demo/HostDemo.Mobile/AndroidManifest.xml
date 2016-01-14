@@ -156,7 +156,7 @@
             
              <intent-filter>
                 <action android:name="cn.vszone.ko.pay.action" />
-				<data android:scheme="Plugin_189Stroe"/>
+				<data android:scheme="Plugin_189Store"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
             

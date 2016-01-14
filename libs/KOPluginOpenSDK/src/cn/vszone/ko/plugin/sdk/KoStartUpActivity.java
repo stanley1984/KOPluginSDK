@@ -82,11 +82,14 @@ public class KoStartUpActivity extends Activity {
     private ExitStartUpBroadcastReceiver mRec                              = null;
 
     private String                       mApkName                          = "KoMobileArena.apk";
-
-    private static final String          DCKEY                             = "85409328C0493F4219A18E27A544383D";
+    /**
+     * 插件SDK的数据之眼AppKey
+     */
+    private static final String          DCKEY                             = "63B160AD6912F4869559484D52D2C028";
     private long                         mStartTime                        = 0;
     private long                         mFetchDownloadUrlStartTime        = 0;
     private long                         mDownloadStartTime                = 0;
+	private boolean                      mFirstStart                       = true;
 
     // ===========================================================
     // Constructors
@@ -103,7 +106,6 @@ public class KoStartUpActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DCAgent.setDebugMode(true);
         DCAgent.setReportMode(DCReportMode.DC_DEFAULT);
         DCAgent.initConfig(getApplicationContext(), DCKEY, AppUtils.getKOChannel(getApplicationContext()));
         mStartTime = System.currentTimeMillis();
@@ -242,6 +244,12 @@ public class KoStartUpActivity extends Activity {
                 startPlugin(mApkUrl);
             }
             mIsBackFromSetting = false;
+        }else{
+        	//确保这个界面在下个界面关闭的时候，这个界面已经退出
+        	if(!mFirstStart){
+        		mFirstStart=false;
+        		exit(true);
+        	}
         }
     }
 
