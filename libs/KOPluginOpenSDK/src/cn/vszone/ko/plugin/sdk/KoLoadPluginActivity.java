@@ -13,10 +13,10 @@ import android.os.Bundle;
 import android.util.Log;
 import cn.vszone.ko.plugin.framework.PluginLoadListener;
 import cn.vszone.ko.plugin.framework.utils.PluginOpener;
-import cn.vszone.ko.plugin.framework.utils.SharedPreferenceUtils;
 import cn.vszone.ko.plugin.sdk.KoStartUpActivity.ExitStartUpBroadcastReceiver;
 import cn.vszone.ko.plugin.sdk.misc.PartnerAppIDs;
 import cn.vszone.ko.plugin.sdk.util.AppUtils;
+import cn.vszone.ko.plugin.sdk.util.SharedPreferenceUtils;
 
 /**
  * @author Jin Binbin
