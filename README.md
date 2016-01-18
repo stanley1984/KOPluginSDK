@@ -202,3 +202,13 @@ Import Eclipse 工程KOPluginHostDemo， 直接运行, 点击启动竞技台插�
    intent.putExtra(KoStartUpActivity.KEY_FILE_NAME, mApkFileName);
    startActivity(intent);
 ```
+
+### 混淆配置
+```
+-libraryjars libs/kopluginframework_[xxxxxxx].jar
+-dontnote cn.vszone.**
+-dontwarn cn.vszone.**
+-keep class cn.vszone.** {
+	*;
+}
+```
