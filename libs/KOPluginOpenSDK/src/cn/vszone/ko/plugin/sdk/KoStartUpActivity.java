@@ -388,7 +388,6 @@ public class KoStartUpActivity extends Activity {
         File file = new File(mPluginDir + "/" + mApkName);
         isHasAPKFile = file.exists();
         if ((isToday() || VSBuildConfig.isInPluginTestMode()) && isHasAPKFile) {
-            updateProgress(STEP_DOWNLOAD, 100.0f);
             startLoadPlugin();
         } else {
             if (!TextUtils.isEmpty(pDownloadUrl)) {
@@ -404,6 +403,7 @@ public class KoStartUpActivity extends Activity {
 
             @Override
             public void run() {
+            	updateProgress(STEP_DOWNLOAD, 100.0f);
                 Intent intent = new Intent(KoStartUpActivity.this, KoLoadPluginActivity.class);
                 intent.putExtra(KEY_FILE_PATH, mPluginDir);
                 intent.putExtra(KEY_FILE_NAME, mApkName);

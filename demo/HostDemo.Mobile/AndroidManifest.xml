@@ -116,8 +116,7 @@
         
         <meta-data
             android:name="KO_CHANNEL"
-
-            android:value="189Store" />
+            android:value="189store" />
         <activity
             android:name="cn.vszone.ko.plugin.sdk.KoStartUpActivity"
             android:label="@string/app_name"
